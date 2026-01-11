@@ -29,8 +29,6 @@ To validate the effectiveness of the File Integrity Monitor, the monitored text 
 The results of the lab confirmed that the script successfully detected file modifications in real time and logged each event consistently. The monitoring process continued without interruption, and log entries persisted even after the script was stopped, providing clear evidence of detected changes.
 
 
-
-
 ## Enhancement 1: Displaying Cryptographic Hash Values
 The initial implementation detected file changes but did not provide visibility into why a change was detected. To improve transparency and reinforce the integrity verification process, the script was enhanced to display cryptographic hash values before and after a file modification occurred.
 
