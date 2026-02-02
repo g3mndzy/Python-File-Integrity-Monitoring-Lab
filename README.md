@@ -26,8 +26,13 @@ Once the script was completed, it was executed from the project directory using 
 
 To validate the effectiveness of the File Integrity Monitor, the monitored text file was opened using Notepad while the script was running. After modifying and saving the file, the script immediately detected the change and displayed a notification in the terminal. At the same time, a new entry was written to the log file, including a timestamp indicating when the modification occurred. This confirmed that the monitoring and logging functionality was working as intended.
 
-The results of the lab confirmed that the script successfully detected file modifications in real time and logged each event consistently. The monitoring process continued without interruption, and log entries persisted even after the script was stopped, providing clear evidence of detected changes.
+The results of the lab confirmed that the script successfully detected file modifications in real time and logged each event consistently. The monitoring process continued without interruption, and log entries persisted even after the scriptwas stopped, providing clear evidence of detected changes.
 
+  <p align="center">
+  <img src="images/Screenshot (2).png" width="1000">
+  <br>
+  <em>Figure 1: FIM Initial Steps: Detecting File Changes</em>
+</p>
 
 
 
@@ -36,7 +41,11 @@ The initial implementation detected file changes but did not provide visibility 
 
 The monitoring logic was updated to print both the previous hash and the current hash whenever a file change was detected. This allowed direct observation of how even small file edits result in completely different hash values. The enhanced output confirmed that detection was based on content integrity rather than file size or timestamps. After implementing this change, the monitored file was edited while the script was running, and the terminal output successfully displayed the hash values alongside a change notification. Corresponding log entries continued to be written to the log file, confirming that the enhancement did not disrupt existing logging behavior.
 
-
+  <p align="center">
+  <img src="images/Screenshot (3).png" width="1000">
+  <br>
+  <em>Figure 2: Displaying Cryptographic Hash Values</em>
+</p>
 
 ## Enhancement 2: File-Deletion Monitoring
 The monitoring logic was updated to print both the previous hash and the current hash whenever a file change was detected. This allowed direct observation of how even small file edits result in completely different hash values. The enhanced output confirmed that detection was based on content integrity rather than file size or timestamps. After implementing this change, the monitored file was edited while the script was running, and the terminal output successfully displayed the hash values alongside a change notification. Corresponding log entries continued to be written to the log file, confirming that the enhancement did not disrupt existing logging behavior.
@@ -44,6 +53,13 @@ The monitoring logic was updated to print both the previous hash and the current
 The hashing logic was removed for this portion of the lab to focus specifically on file existence monitoring. The script was updated to track whether the monitored file was present during the previous check and compare it against the current state. When a file transitioned from “present” to “missing,” the script generated an alert in the terminal and wrote a DELETED event to a dedicated deletion events log file. This approach ensured that deletion was logged once per event and did not repeatedly spam the logs.
 
 The script was configured to monitor a file located in a separate directory using an absolute file path, demonstrating that the monitoring tool does not need to reside in the same folder as the target asset.
+
+  <p align="center">
+  <img src="images/Screenshot (4).png" width="1000">
+  <br>
+  <em>Figure 3: File-Deletion Monitoring </em>
+</p>
+
 
 ### Troubleshooting
 During initial testing, the deletion event did not trigger as expected. Troubleshooting revealed that the monitored file path and filename must match exactly, and that the file must exist at the time the script starts in order for deletion to be detected. To validate this, a different test file was selected, and the filename was verified character-for-character to ensure accuracy. The file was then deleted directly from the Command Prompt using the full absolute path, eliminating any ambiguity about which file was being removed.
